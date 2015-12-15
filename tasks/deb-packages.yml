@@ -1,0 +1,24 @@
+---
+- include_vars: "{{ ansible_os_family }}.yml"
+# Blatantly stolen from zshamrock github until PR #2613 is merged
+- name: verify missing packages
+  tags: deb-packages
+  shell: dpkg -s {{ item.name }} 2>&1 | grep -i "is not installed" -c
+  with_items:
+    - { url: "{{ al_agent_pkg_url }}", name: "al-agent" }
+  register: deb_packages_status
+  ignore_errors: True
+  changed_when: False
+
+- name: download deb packages from the web
+  tags: deb-packages
+  get_url: url={{ item.item.url }} dest=/tmp/{{ item.item.name }}.deb force=no
+  with_items: "{{ deb_packages_status.results }}"
+  when: item.stdout|int == 1 
+
+- name: install downloaded deb packages
+  tags: deb-packages
+  become: yes
+  apt: deb=/tmp/{{ item.item.name }}.deb state=present
+  with_items: "{{ deb_packages_status.results }}"
+  when: item.stdout|int == 1

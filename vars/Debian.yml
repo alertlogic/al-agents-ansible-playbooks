@@ -1,0 +1,8 @@
+---
+al_agent_initscript: 'rsyslog'
+al_agent_pkg_name_arch: "{{ ( ansible_architecture == 'x86_64' ) | ternary('amd64', ansible_architecture) }}" 
+al_agent_pkg_name_ext: 'deb'
+al_agent_syslog_ng_source: "{{ ( ansible_distribution_major_version >= '7' ) | ternary('s_all', 's_sys') }}"
+al_agent_base_url: 'https://scc.alertlogic.net'
+al_agent_pkg_name_prefix: 'al-agent_LATEST_'
+al_agent_pkg_url: "{{ al_agent_base_url }}/software/{{ al_agent_pkg_name_prefix }}{{al_agent_pkg_name_arch}}.{{al_agent_pkg_name_ext}}"

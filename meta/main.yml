@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: Craig Davis 
+  description: Configure and Install AlertLogic Agents
+  company: AlertLogic
+  license: Apache
+  min_ansible_version: 2.0
+  platforms:
+    - name: Debian
+      versions:
+        - 6
+        - 7
+    - name: CentOS
+      versions:
+        - 6
+        - 7
+  categories:
+    - monitoring
+dependencies: []

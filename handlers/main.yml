@@ -1,0 +1,12 @@
+---
+# Handler to handle common notifications. Handlers are called by other plays.
+# See http://docs.ansible.com/playbooks_intro.html for more information about handlers.
+
+- name: restart al-agent
+  service: name=al-agent state=restarted
+
+- name: reload syslog-ng
+  service: name=syslog-ng state=reloaded
+
+- name: reload rsyslog
+  service: name=rsyslog state=reloaded
