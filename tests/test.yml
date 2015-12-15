@@ -1,0 +1,5 @@
+---
+- name: Apply AL Agent install to specific hosts
+  hosts: al_agents
+  roles:
+    - { role: alertlogic.al_agents}

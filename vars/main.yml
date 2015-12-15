@@ -1,0 +1,20 @@
+---
+al_agent_registration_key: 'your_registration_key_here'
+# Must be a full https uri including port
+al_agent_egress_url: 'vaporator.alertlogic.com:443'
+# Uncomment the following when changing
+# al_agent_proxy_url: ''
+# al_agent_for_autoscaling: ''
+# al_agent_for_imaging: ''
+
+#########################################
+###### DO NOT EDIT BELOW THIS LINE ######
+#########################################
+
+# Setting variables for provisioning of the agent
+al_agent_regoptions: "{{ ( al_agent_registration_key is defined ) | ternary('--key ' + al_agent_registration_key,'') }}"
+al_agent_typeoptions: "{{ ( al_agent_for_autoscaling is defined ) | ternary('--inst-type role','--inst-type host') }}"
+
+# Setting variables for configuring the agent
+al_agent_proxyoptions: "{{ ( al_agent_proxy_url is defined ) | ternary('--proxy ' + al_agent_proxy_url, '') }}"
+al_agent_hostoptions: "{{ ( al_agent_egress_url is defined ) | ternary('--host ' + al_agent_egress_url, '') }}"
