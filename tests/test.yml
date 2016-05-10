@@ -1,5 +1,5 @@
 ---
-- name: Apply AL Agent install to specific hosts
-  hosts: al_agents
+- hosts: localhost
+  remote_user: root
   roles:
-    - { role: alertlogic.al_agents}
+    - al-agents-ansible-playbooks
