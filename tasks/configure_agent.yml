@@ -1,0 +1,13 @@
+##############################
+- set_fact: al_agent_configure_options=""
+
+- set_fact: al_agent_configure_options="{{ al_agent_configure_options }} --proxy {{ al_agent_proxy_url }}"
+  when: al_agent_proxy_url is defined
+
+- set_fact: al_agent_configure_options="{{ al_agent_configure_options }} --host {{ al_agent_egress_host }}"
+  when: al_agent_egress_host is defined
+
+- name: Configure AlertLogic Agent
+  command: "/etc/init.d/al-agent configure {{ al_agent_configure_options }}"
+  tags: configure_al_agent
+  when: agent_provisioned|failed
