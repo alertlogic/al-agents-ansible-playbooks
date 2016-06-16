@@ -1,0 +1,19 @@
+- name: Test for rsyslog being installed
+  command: "ls /etc/init.d/rsyslog"
+  ignore_errors: True
+  register: rsyslog_init_exists
+  tags: rsyslog
+
+- name: Test for syslog-ng being installed
+  command: "ls /etc/init.d/syslog-ng"
+  ignore_errors: True
+  register: syslog_ng_init_exists
+  tags: syslog_ng
+
+
+- include: _rsyslog.yml
+  when: rsyslog_init_exists 
+  tags: [rsyslog, configure_al_agent_syslog]
+- include: _syslog_ng.yml
+  when: syslog_ng_init_exists 
+  tags: [syslog_ng, configure_al_agent_syslog]

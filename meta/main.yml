@@ -21,4 +21,6 @@ galaxy_info:
     - ids
   galaxy_tags:
     - monitoring
+    - alertlogic
+    - ids
 dependencies: []
