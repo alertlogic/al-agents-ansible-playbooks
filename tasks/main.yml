@@ -1,98 +1,11 @@
 ---
 ##############################
-- include_vars: "{{ ansible_os_family }}.yml"
-  tags: always
+- include: _windows.yml
+  when: ansible_os_family == "Windows"
+  tags: [windows]
 
-##############################
-- block:
-    # Temporary workaround until ansible-modules-core PR #2613 is merged
-  - include: deb-packages.yml
-    when: ansible_os_family == "Debian"
+- include: _linux.yml
+  tags: [al_agent]
+  when: ansible_os_family != "Windows"
 
-  - name: Install AlertLogic Agent
-    package: name="{{ al_agent_pkg_url }}" state=present
-    tags: install_al_agent
-    # Temporary workaround until ansible-modules-core PR #2613 is merged
-    when: ansible_os_family != "Debian"
-
-  - name: Start the AlertLogic Agent service
-    service: name=al-agent state=started enabled=yes
-    tags: install_al_agent
-
-##############################
-- name: Test for Agent Provisioned
-  command: "ls /var/alertlogic/etc/host_key.pem"
-  ignore_errors: True
-  register: agent_provisioned
-  tags: 
-    - configure_al_agent
-    - provision_al_agent
-
-##############################
-- name: Configure AlertLogic Agent
-  command: "/etc/init.d/al-agent configure {{ al_agent_hostoptions }} {{ al_agent_proxyoptions }}"
-  tags: configure_al_agent
-  when: agent_provisioned|failed
-
-##############################
-- name: Provision AlertLogic Agent
-  command: "/etc/init.d/al-agent provision {{ al_agent_typeoptions }} {{ al_agent_regoptions }}"
-  notify:
-    - restart al-agent
-  tags: provision_al_agent
-  when: not al_agent_for_imaging and agent_provisioned|failed
-
-##############################
-- block:
-  - name: Test for rsyslog being installed
-    command: "ls /etc/init.d/rsyslog"
-    ignore_errors: True
-    register: rsyslog_init_exists
-    tags: rsyslog
-
-  - name: Configure rsyslogd
-    notify:
-      - restart rsyslog
-    tags: rsyslog
-    template: src=templates/etc/rsyslog/alertlogic.conf dest=/etc/rsyslog.d/alertlogic.conf owner=root group=root mode=0644
-    when: rsyslog_init_exists|success
-
-##############################
-- block:
-  - name: Test for syslog-ng being installed
-    command: "ls /etc/init.d/syslog-ng"
-    ignore_errors: True
-    register: syslog_ng_init_exists
-    tags: syslog_ng
-
-  - name: Insert/Update syslog-ng.conf for inclusion of alertlogic.conf
-    lineinfile: dest=/etc/syslog-ng/syslog-ng.conf regexp=/etc/syslog-ng/conf.d/alertlogic.conf line="include '/etc/syslog-ng/conf.d/alertlogic.conf';"
-    notify:
-      - reload syslog-ng
-    tags: syslog_ng
-    when: syslog_ng_init_exists|success
-
-  - name: Ensure alertlogic.conf file is in place for syslog-ng
-    notify:
-      - reload syslog-ng
-    tags: syslog_ng
-    template: src=templates/etc/syslog-ng/alertlogic.conf dest=/etc/syslog-ng/conf.d/alertlogic.conf owner=root group=root mode=0644
-    when: syslog_ng_init_exists|success
-
-##############################
-- block:
-  - name: test to see if selinux is running
-    changed_when: false
-    command: getenforce
-    ignore_errors: True
-    register: sestatus
-    tags: selinux
-
-  - name: Configure SELinux to allow port 1514 for AlertLogic Agent
-    seport: ports=1514 proto=tcp setype=syslogd_port_t state=present
-    tags: selinux
-    when: sestatus|success
-
-
-##############################
 ##############################

@@ -12,7 +12,6 @@ galaxy_info:
         - squeeze
         - wheezy
     - name: EL
-      versions:
         - 6
         - 7
   categories:
@@ -21,4 +20,6 @@ galaxy_info:
     - ids
   galaxy_tags:
     - monitoring
+    - alertlogic
+    - ids
 dependencies: []
