@@ -12,4 +12,4 @@
   notify:
     - restart al-agent
   tags: provision_al_agent
-  when: not al_agent_for_imaging and agent_provisioned|failed and al_agent_provision_options != "[]"
+  when: not al_agent_for_imaging and  agent_provisioned.stat.exists == false and al_agent_provision_options != "[]"

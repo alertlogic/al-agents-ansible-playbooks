@@ -1,13 +1,6 @@
 ##############################
 - block:
-  - name: test to see if selinux is running
-    changed_when: false
-    command: getenforce
-    ignore_errors: True
-    register: sestatus
-    tags: selinux
-
   - name: Configure SELinux to allow port 1514 for AlertLogic Agent
     seport: ports=1514 proto=tcp setype=syslogd_port_t state=present
     tags: selinux
-    when: sestatus|success
+    when: ansible_selinux != false and ansible_selinux.status == true
