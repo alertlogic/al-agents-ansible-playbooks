@@ -14,7 +14,7 @@
   tags: provision_al_agent
   when: not al_agent_for_imaging and agent_provisioned.stat.exists == false and al_agent_provision_options != "[]"
 
-- name: Provision AlertLogic Agent
+- name: Provision AlertLogic Agent - for Imaging
   command: "/etc/init.d/al-agent provision {{ al_agent_provision_options|join(' ') }}"
   tags: provision_al_agent
   when: al_agent_for_imaging and agent_provisioned.stat.exists == false and al_agent_provision_options != "[]"
