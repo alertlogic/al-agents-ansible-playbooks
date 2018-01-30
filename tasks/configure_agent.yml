@@ -1,6 +1,12 @@
 ##############################
 - set_fact: al_agent_configure_options=""
 
+- set_fact: al_agent_configure_options="{{ al_agent_configure_options }} + [ \'--proxy \' + al_agent_proxy_url ]"
+  when: al_agent_proxy_url is defined
+
+- set_fact: al_agent_configure_options="{{ al_agent_configure_options }} + [ \'--host \' + al_agent_egress_host + \':\' + al_agent_egress_port ]"
+  when: al_agent_egress_port is defined and al_agent_egress_host is defined
+
 - set_fact: al_agent_configure_options="{{ al_agent_configure_options }} --proxy {{ al_agent_proxy_url }}"
   when: al_agent_proxy_url is defined
 
