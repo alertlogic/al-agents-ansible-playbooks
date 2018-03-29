@@ -1,5 +1,5 @@
 - name: Test for rsyslog being installed
-  command: "ls /etc/init.d/rsyslog"
+  command: "ls /etc/rsyslog.conf"
   ignore_errors: True
   register: rsyslog_init_exists
   tags: rsyslog
