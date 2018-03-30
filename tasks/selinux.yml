@@ -3,4 +3,4 @@
   - name: Configure SELinux to allow port 1514 for AlertLogic Agent
     seport: ports=1514 proto=tcp setype=syslogd_port_t state=present
     tags: selinux
-    when: ansible_selinux != false and ansible_selinux.status == true
+    when: ansible_selinux != false and ansible_selinux.status == 'enabled'
