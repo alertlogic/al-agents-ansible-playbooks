@@ -4,9 +4,6 @@
 - set_fact: al_agent_provision_options="{{ al_agent_provision_options }} + [ \'--key \' + al_agent_registration_key ]"
   when: al_agent_registration_key is defined and al_agent_registration_key != "your_registration_key_here"
 
-- set_fact: al_agent_provision_options="{{ al_agent_provision_options }} + [ \'--inst-type host\']"
-  when: al_agent_for_autoscaling
-
 - name: Provision AlertLogic Agent
   command: "/etc/init.d/al-agent provision {{ al_agent_provision_options|join(' ') }}"
   notify:

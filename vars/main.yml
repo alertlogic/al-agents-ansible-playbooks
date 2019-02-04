@@ -5,5 +5,4 @@
 #al_agent_egress_port: ''
 #al_agent_egress_host: ''
 #al_agent_proxy_url: ''
-al_agent_for_autoscaling: False
 al_agent_for_imaging: False

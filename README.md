@@ -10,7 +10,6 @@ Available variables are listed below, along with default values:
     al_agent_egress_port: '' # Optional
     al_agent_egress_host: '' # Optional
     al_agent_proxy_url: '' # Optional
-    al_agent_for_autoscaling: True/False # Default is False
     al_agent_for_imaging: True/False # Default is False
 
 ## Dependencies
