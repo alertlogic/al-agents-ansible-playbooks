@@ -12,9 +12,9 @@
 
 - name: download deb packages from the web
   tags: deb-packages
-  get_url: url={{ item.item.url }} dest=/tmp/{{ item.item.name }}.deb force=no
+  get_url: url={{ item.item.url }} dest=/tmp/{{ item.item.name }}.deb force=no timeout=300
   with_items: "{{ deb_packages_status.results }}"
-  when: item.stdout|int == 1 
+  when: item.stdout|int == 1
 
 - name: install downloaded deb packages
   tags: deb-packages
