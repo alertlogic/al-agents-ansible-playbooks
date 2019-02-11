@@ -35,9 +35,6 @@
 - debug: var=al_agent_windows
 
 - name: Install AlertLogic Agent
-  win_msi:
+  win_package:
     path: 'C:\TEMP\al_agent-LATEST.msi'
-    creates: 'C:\Program Files (x86)\AlertLogic'
-    wait: True
-    # Not working if more than one argument is passed, https://github.com/ansible/ansible-modules-core/issues/1229
-    extra_args: "{{ al_agent_windows }}"
+    arguments: "{{ al_agent_windows }}"

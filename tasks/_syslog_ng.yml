@@ -3,11 +3,11 @@
   notify:
     - reload syslog-ng
   tags: syslog_ng
-  when: syslog_ng_init_exists|success
+  when: syslog_ng_init_exists is success
 
 - name: Ensure alertlogic.conf file is in place for syslog-ng
   notify:
     - reload syslog-ng
   tags: syslog_ng
   template: src=templates/syslog-ng/alertlogic.conf dest=/etc/syslog-ng/conf.d/alertlogic.conf owner=root group=root mode=0644
-  when: syslog_ng_init_exists|success
+  when: syslog_ng_init_exists is success
