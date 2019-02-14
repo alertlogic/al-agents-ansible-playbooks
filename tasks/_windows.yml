@@ -34,7 +34,7 @@
 
 - debug: var=al_agent_windows
 
-- name: Install AlertLogic Agent
+- name: Install AlertLogic Agent on Windows
   win_package:
     path: 'C:\TEMP\al_agent-LATEST.msi'
     arguments: "{{ al_agent_windows }}"

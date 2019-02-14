@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Craig Davis 
+  author: Craig Davis
   description: Configure and Install AlertLogic Agents
   company: AlertLogic
   license: Apache
@@ -11,13 +11,29 @@ galaxy_info:
       versions:
         - squeeze
         - wheezy
+        - jessie
+    - name: Ubuntu
+      versions:
+        - 10.x
+        - 12.x
+        - 14.x
+        - 16.x
     - name: EL
       versions:
-        - 6
-        - 7
+        - 6.x
+        - 7.x
+    - name: Suse
+      versions:
+        - 12.1
+        - 12.0
+        - 11.4
+        - 11.3
+    - name: Amazon
+      versions:
+        - Karoo
     - name: Windows
       versions:
-        - 2012R2
+        - all
   categories:
     - monitoring
     - alertlogic
