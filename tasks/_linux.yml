@@ -31,7 +31,7 @@
   tags: [selinux]
 
 ##############################
-- name: Start the AlertLogic Agent service
+- name: Start the Alert Logic Agent service
   service:
     name: al-agent
     state: started

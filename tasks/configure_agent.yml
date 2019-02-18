@@ -16,7 +16,7 @@
 - set_fact: al_agent_configure_options="{{ al_agent_configure_options }} --host {{ al_agent_egress_host }}"
   when: al_agent_egress_host is defined
 
-- name: Configure AlertLogic Agent
+- name: Configure Alert Logic Agent
   command: "/etc/init.d/al-agent configure {{ al_agent_configure_options }}"
   tags: configure_al_agent
   when: agent_provisioned.stat.exists == false
