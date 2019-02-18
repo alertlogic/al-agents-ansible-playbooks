@@ -10,7 +10,7 @@
   stat: path=/var/alertlogic/etc/host_key.pem
   register: agent_provisioned
   ignore_errors: True
-  tags: 
+  tags:
     - configure_al_agent
     - provision_al_agent
 
@@ -30,3 +30,11 @@
 - include: selinux.yml
   tags: [selinux]
 
+##############################
+- name: Start the Alert Logic Agent service
+  service:
+    name: al-agent
+    state: started
+    enabled: yes
+  tags: install_al_agent
+  when: not al_agent_for_imaging

@@ -4,7 +4,7 @@
   - include: deb-packages.yml
     when: ansible_os_family == "Debian"
 
-  - name: Install AlertLogic Agent on CentOS/RHEL/Amazon
+  - name: Install Alert Logic Agent on CentOS/RHEL/Amazon
     package:
       name: "{{ al_agent_pkg_url }}"
       state: present
@@ -14,18 +14,10 @@
       - ansible_os_family != "Debian"
       - ansible_os_family != "Suse"
 
-  - name: Install AlertLogic Agent on Suse
+  - name: Install Alert Logic Agent on Suse
     zypper:
       name: "{{ al_agent_pkg_url }}"
       state: present
     tags: install_al_agent
     when: ansible_os_family == "Suse"
-
-  - name: Start the AlertLogic Agent service
-    service:
-      name: al-agent
-      state: started
-      enabled: yes
-    tags: install_al_agent
-    when: not al_agent_for_imaging
 
