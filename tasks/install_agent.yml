@@ -1,23 +1,29 @@
 ##############################
 - block:
     # Temporary workaround until ansible-modules-core PR #2613 is merged
-  - include: deb-packages.yml
-    when: ansible_os_family == "Debian"
+    - name: Include Debian installation file
+      include: deb-packages.yml
+      when: ansible_os_family == "Debian"
 
-  - name: Install Alert Logic Agent on CentOS/RHEL/Amazon
-    package:
-      name: "{{ al_agent_pkg_url }}"
-      state: present
-    tags: install_al_agent
-    # Temporary workaround until ansible-modules-core PR #2613 is merged
-    when:
-      - ansible_os_family != "Debian"
-      - ansible_os_family != "Suse"
+    - name: Install Alert Logic Agent on CentOS/RHEL/Amazon
+      package:
+        name: "{{ al_agent_pkg_url }}"
+        state: present
+      tags: install_al_agent
+      register: install_result
+      retries: 3
+      until: install_result is success
+      # Temporary workaround until ansible-modules-core PR #2613 is merged
+      when:
+        - ansible_os_family != "Debian"
+        - ansible_os_family != "Suse"
 
-  - name: Install Alert Logic Agent on Suse
-    zypper:
-      name: "{{ al_agent_pkg_url }}"
-      state: present
-    tags: install_al_agent
-    when: ansible_os_family == "Suse"
-
+    - name: Install Alert Logic Agent on Suse
+      zypper:
+        name: "{{ al_agent_pkg_url }}"
+        state: present
+      tags: install_al_agent
+      register: install_result
+      retries: 3
+      until: install_result is success
+      when: ansible_os_family == "Suse"

@@ -1,5 +1,7 @@
 ---
-- include_vars: "{{ ansible_os_family }}.yml"
+- name: Include Ansible OS family variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
 # Blatantly stolen from zshamrock github until PR #2613 is merged
 - name: verify missing debian packages
   tags: deb-packages
@@ -12,13 +14,19 @@
 
 - name: download debian packages from the web
   tags: deb-packages
-  get_url: url={{ item.item.url }} dest=/tmp/{{ item.item.name }}.deb force=no timeout=300
+  get_url:
+    url: "{{ item.item.url }}"
+    dest: /tmp/{{ item.item.name }}.deb
+    force: no
+    timeout: 300
   with_items: "{{ deb_packages_status.results }}"
   when: item.stdout|int == 1
 
 - name: install downloaded debian packages
   tags: deb-packages
   become: yes
-  apt: deb=/tmp/{{ item.item.name }}.deb state=present
+  apt:
+    deb: /tmp/{{ item.item.name }}.deb
+    state: present
   with_items: "{{ deb_packages_status.results }}"
   when: item.stdout|int == 1
