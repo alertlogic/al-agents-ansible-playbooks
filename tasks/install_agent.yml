@@ -1,8 +1,9 @@
 ##############################
 - block:
-    # Temporary workaround until ansible-modules-core PR #2613 is merged
-    - name: Include Debian installation file
-      include: deb-packages.yml
+    - name: Install Alert Logic Agent on Debian/Ubuntu
+      apt:
+        deb: "{{ al_agent_pkg_url }}"
+      tags: install_al_agent
       when: ansible_os_family == "Debian"
 
     - name: Install Alert Logic Agent on CentOS/RHEL/Amazon
@@ -13,7 +14,6 @@
       register: install_result
       retries: 3
       until: install_result is success
-      # Temporary workaround until ansible-modules-core PR #2613 is merged
       when:
         - ansible_os_family != "Debian"
         - ansible_os_family != "Suse"
