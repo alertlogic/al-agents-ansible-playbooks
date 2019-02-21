@@ -4,6 +4,9 @@
       apt:
         deb: "{{ al_agent_pkg_url }}"
       tags: install_al_agent
+      register: install_result
+      retries: 3
+      until: install_result is success
       when: ansible_os_family == "Debian"
 
     - name: Install Alert Logic Agent on CentOS/RHEL/Amazon
