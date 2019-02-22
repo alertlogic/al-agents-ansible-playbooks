@@ -2,5 +2,10 @@
   notify:
     - restart rsyslog
   tags: rsyslog
-  template: src=templates/etc/rsyslog/alertlogic.conf dest=/etc/rsyslog.d/alertlogic.conf owner=root group=root mode=0644
-  when: rsyslog_init_exists is success
+  template:
+    src: templates/etc/rsyslog/alertlogic.conf
+    dest: /etc/rsyslog.d/alertlogic.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: rsyslog_init is success
