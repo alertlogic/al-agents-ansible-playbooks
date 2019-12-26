@@ -1,11 +1,11 @@
 ##############################
 - name: Set Linux optional facts
   set_fact:
-    al_agent_provision_options: "[]"
+    al_agent_provision_options: []
 
 - name: Set Linux optional fact for using a registration key
   set_fact:
-    al_agent_provision_options: "{{ al_agent_provision_options }} + [ \"--key \" + al_agent_registration_key ]"
+    al_agent_provision_options: "{{ al_agent_provision_options  +  [ \"--key \" +  al_agent_registration_key  ] }}"
   when: al_agent_registration_key is defined and al_agent_registration_key != "your_registration_key_here"
 
 - name: Provision Alert Logic Agent
