@@ -30,13 +30,7 @@ galaxy_info:
         - 12.3
     - name: Amazon
       versions:
-        - 2013.03
-        - 2013.09
-        - 2016.03
-        - 2016.09
-        - 2017.03
-        - 2017.09
-        - 2017.12
+        - all
     - name: Windows
       versions:
         - 2008R2
