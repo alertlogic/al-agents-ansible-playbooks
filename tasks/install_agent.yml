@@ -9,6 +9,18 @@
       until: install_result is success
       when: ansible_os_family == "Debian"
 
+    - name: Install Alert Logic Agent on CentOS/RHEL
+      yum:
+        name: "{{ al_agent_pkg_url }}"
+        state: present
+        disable_gpg_check: yes # KLUDGE: See https://github.com/alertlogic/al-agents-ansible-playbooks/issues/32
+      tags: install_al_agent
+      register: install_result
+      retries: 3
+      until: install_result is success
+      when:
+        - ansible_os_family == "RedHat"
+
     - name: Install Alert Logic Agent on CentOS/RHEL/Amazon
       package:
         name: "{{ al_agent_pkg_url }}"
