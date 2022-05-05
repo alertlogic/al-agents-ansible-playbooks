@@ -1,2 +1,4 @@
 ---
-# defaults file for al-agents
+
+# KLUDGE: See https://github.com/alertlogic/al-agents-ansible-playbooks/issues/32
+disable_gpg_check: true

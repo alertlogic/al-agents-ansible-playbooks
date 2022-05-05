@@ -1,5 +1,5 @@
 ---
-##############################
+
 - include: _windows.yml
   when: ansible_os_family == "Windows"
   tags: [windows]
@@ -7,5 +7,3 @@
 - include: _linux.yml
   tags: [al_agent]
   when: ansible_os_family != "Windows"
-
-##############################

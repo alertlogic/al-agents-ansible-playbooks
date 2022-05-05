@@ -1,4 +1,5 @@
-##############################
+---
+
 - name: Include Ansible OS family variables
   include_vars: "{{ ansible_os_family }}.yml"
   tags: always
@@ -7,7 +8,6 @@
   include: install_agent.yml
   tags: [install_agent]
 
-##############################
 - name: Test for Agent Provisioned
   stat:
     path: /var/alertlogic/etc/host_key.pem
@@ -17,27 +17,22 @@
     - configure_al_agent
     - provision_al_agent
 
-##############################
 - name: Include Agent optional configuration file
   include: configure_agent.yml
   tags: [configure_al_agent]
 
-##############################
 - name: Include Agent Provisioning file
   include: provision_agent.yml
   tags: [provision_al_agent]
 
-##############################
 - name: Include configuration steps required for log collection in Linux
   include: configure_loggers.yml
   tags: [provision_al_agent]
 
-##############################
 - name: Include check for SELinux policy requirements
   include: selinux.yml
   tags: [selinux]
 
-##############################
 - name: Start the Alert Logic Agent service
   service:
     name: al-agent

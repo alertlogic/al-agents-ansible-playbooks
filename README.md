@@ -1,6 +1,10 @@
-# Ansible Role: al-agents
+# Ansible Role: alagent
+
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 
 This playbook is used to install and configure the Alert Logic agent.
+
+Forked from the abandoned project originally sponsored by Alert Logic at https://github.com/alertlogic/al-agents-ansible-playbooks to have a workaround for https://github.com/alertlogic/al-agents-ansible-playbooks/issues/32 where GPG checks for RPMs caused installations to fail.
 
 ## Requirements
 
@@ -8,29 +12,18 @@ The following platforms are supported.
 
 Debian versions:
 
-* squeeze
-* wheezy
-* jessie
+* buster
+* bullseye
 
 Ubuntu versions:
 
-* 10.x
-* 12.x
-* 14.x
-* 16.x
-* 18.x
+* 22.04
+* 20.04
 
 RHEL/CentOS versions:
 
-* 6.x
 * 7.x
-
-SuSE versions:
-
-* 12.1
-* 12.0
-* 11.4
-* 11.3
+* 8.x
 
 Amazon Linux versions:
 
@@ -38,8 +31,7 @@ Amazon Linux versions:
 
 Windows versions:
 
-* Windows Server 2003+SP1, 2008, 2012, 2016
-* Windows XP+SP1, Vista, 7, 8, 10
+* Windows Server 2016, 2019
 
 ## Role Variables
 
@@ -58,7 +50,7 @@ Windows versions:
     - name: Apply AL Agent install to specific hosts
       hosts: al_agents
       roles:
-        - { role: alertlogic.al_agents}
+        - { role: deekayen.alagent}
 
 ## Configurations
 
@@ -83,4 +75,4 @@ Distributed under the Apache 2.0 license.
 
 Authors:
 Muram Mohamed (mmohamed@alertlogic.com)
-Justin Early (jearly@alertlogi.com)
+Justin Early (jearly@alertlogic.com)

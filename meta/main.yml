@@ -1,44 +1,33 @@
 ---
+
 galaxy_info:
+  role_name: alagent
+  namespace: deekayen
   author: Craig Davis
-  description: Configure and Install Alert Logic Agents
-  company: Alert Logic
+  description: Configure and Install Alert Logic Agents.
   license: Apache
   min_ansible_version: 2.1
-  issue_tracker_url: https://github.com/alertlogic/al-agents-ansible-playbooks/issues
+  issue_tracker_url: https://github.com/deekayen/al-agents-ansible-playbooks/issues
   platforms:
     - name: Debian
       versions:
-        - squeeze
-        - wheezy
-        - jessie
+        - buster
+        - bullseye
     - name: Ubuntu
       versions:
-        - lucid
-        - precise
-        - trusty
-        - xenial
-        - bionic
+        - focal
+        - jammy
     - name: EL
       versions:
-        - 6
         - 7
-    - name: opensuse
-      versions:
-        - 12.1
-        - 12.2
-        - 12.3
+        - 8
     - name: Amazon
       versions:
         - all
     - name: Windows
       versions:
-        - 2008R2
-        - 2008x64
-        - 2008x86
-        - 2012
-        - 2012R2
         - 2016
+        - 2019
   galaxy_tags:
     - monitoring
     - alertlogic

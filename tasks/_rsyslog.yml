@@ -1,3 +1,5 @@
+---
+
 - name: Configure rsyslogd
   notify:
     - restart rsyslog

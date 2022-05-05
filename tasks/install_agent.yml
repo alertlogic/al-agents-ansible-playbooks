@@ -1,4 +1,5 @@
-##############################
+---
+
 - block:
     - name: Install Alert Logic Agent on Debian/Ubuntu
       apt:
@@ -13,7 +14,7 @@
       yum:
         name: "{{ al_agent_pkg_url }}"
         state: present
-        disable_gpg_check: yes # KLUDGE: See https://github.com/alertlogic/al-agents-ansible-playbooks/issues/32
+        disable_gpg_check: "{{ disable_gpg_check }}"
       tags: install_al_agent
       register: install_result
       retries: 3

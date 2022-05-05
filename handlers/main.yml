@@ -3,10 +3,16 @@
 # See http://docs.ansible.com/playbooks_intro.html for more information about handlers.
 
 - name: restart al-agent
-  service: name=al-agent state=restarted
+  service:
+    name: al-agent
+    state: restarted
 
 - name: reload syslog-ng
-  service: name=syslog-ng state=reloaded
+  service:
+    name: syslog-ng
+    state: reloaded
 
 - name: restart rsyslog
-  service: name=rsyslog state=restarted
+  service:
+    name: rsyslog
+    state: restarted

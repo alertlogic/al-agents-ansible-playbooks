@@ -1,3 +1,5 @@
+---
+
 - name: Insert/Update syslog-ng.conf for inclusion of alertlogic.conf
   lineinfile:
     dest: /etc/syslog-ng/syslog-ng.conf
