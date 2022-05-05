@@ -1,13 +1,13 @@
 ---
 
 - name: Test for rsyslog being installed
-  stat:
+  ansible.builtin.stat:
     path: "/etc/rsyslog.conf"
   register: rsyslog_init
   tags: rsyslog
 
 - name: Test for syslog-ng being installed
-  stat:
+  ansible.builtin.stat:
     path: "/etc/init.d/syslog-ng"
   register: syslog_ng_init
   tags: syslog_ng

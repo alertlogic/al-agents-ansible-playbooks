@@ -1,4 +1,5 @@
 ---
+
 al_agent_initscript: 'rsyslog'
 al_agent_pkg_name_arch: "{{ ansible_architecture }}"
 al_agent_pkg_name_ext: 'rpm'

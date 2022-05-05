@@ -1,8 +1,9 @@
 ---
+
 ### Uncomment for global or place in group/host vars for granular control ###
 # al_agent_registration_key: 'your_registration_key_here'
 ### Uncomment the following when configuring optionals ###
 # al_agent_egress_port: '443'
 # al_agent_egress_host: ''
 # al_agent_proxy_url: ''
-al_agent_for_imaging: False
+al_agent_for_imaging: false

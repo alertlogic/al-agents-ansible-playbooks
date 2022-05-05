@@ -1,26 +1,26 @@
 ---
 
 - name: Set Linux optional configs facts
-  set_fact:
+  ansible.builtin.set_fact:
     al_agent_configure_options: ""
 
 - name: Set Linux optional configs fact for using proxy
-  set_fact:
+  ansible.builtin.set_fact:
     al_agent_configure_options: "{{ al_agent_configure_options }} --proxy {{ al_agent_proxy_url }}"
   when: al_agent_proxy_url is defined
 
 - name: Set Linux optional configs fact for egress host and port
-  set_fact: al_agent_configure_options="{{ al_agent_configure_options }}
+  ansible.builtin.set_fact: al_agent_configure_options="{{ al_agent_configure_options }}
      --host {{ al_agent_egress_host }}
      --port {{ al_agent_egress_port }}"
   when: al_agent_egress_port is defined and al_agent_egress_host is defined
 
 - name: Set Linux optional configs fact for egress host only
-  set_fact:
+  ansible.builtin.set_fact:
     al_agent_configure_options: "{{ al_agent_configure_options }} --host {{ al_agent_egress_host }}"
   when: al_agent_egress_port is defined and al_agent_egress_host is not defined
 
 - name: Configure Alert Logic Agent (optional)
-  command: "/etc/init.d/al-agent configure {{ al_agent_configure_options }}"
+  ansible.builtin.command: "/etc/init.d/al-agent configure {{ al_agent_configure_options }}"
   tags: configure_al_agent
   when: not agent_provisioned.stat.exists

@@ -1,7 +1,7 @@
 ---
 
 - name: Include Ansible OS family variables
-  include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
   tags: always
 
 - name: Include Agent installation file
@@ -9,10 +9,10 @@
   tags: [install_agent]
 
 - name: Test for Agent Provisioned
-  stat:
+  ansible.builtin.stat:
     path: /var/alertlogic/etc/host_key.pem
   register: agent_provisioned
-  ignore_errors: True
+  ignore_errors: true
   tags:
     - configure_al_agent
     - provision_al_agent
@@ -34,9 +34,9 @@
   tags: [selinux]
 
 - name: Start the Alert Logic Agent service
-  service:
+  ansible.builtin.service:
     name: al-agent
     state: started
-    enabled: yes
+    enabled: true
   tags: install_al_agent
   when: not al_agent_for_imaging

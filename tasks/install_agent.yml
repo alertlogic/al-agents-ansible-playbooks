@@ -2,7 +2,7 @@
 
 - block:
     - name: Install Alert Logic Agent on Debian/Ubuntu
-      apt:
+      ansible.builtin.apt:
         deb: "{{ al_agent_pkg_url }}"
       tags: install_al_agent
       register: install_result
@@ -11,7 +11,7 @@
       when: ansible_os_family == "Debian"
 
     - name: Install Alert Logic Agent on CentOS/RHEL
-      yum:
+      ansible.builtin.yum:
         name: "{{ al_agent_pkg_url }}"
         state: present
         disable_gpg_check: "{{ disable_gpg_check }}"
@@ -23,7 +23,7 @@
         - ansible_os_family == "RedHat"
 
     - name: Install Alert Logic Agent on CentOS/RHEL/Amazon
-      package:
+      ansible.builtin.package:
         name: "{{ al_agent_pkg_url }}"
         state: present
       tags: install_al_agent

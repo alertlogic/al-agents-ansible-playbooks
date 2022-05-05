@@ -4,7 +4,7 @@
   notify:
     - restart rsyslog
   tags: rsyslog
-  template:
+  ansible.builtin.template:
     src: templates/etc/rsyslog/alertlogic.conf
     dest: /etc/rsyslog.d/alertlogic.conf
     owner: root
