@@ -27,7 +27,7 @@ jobs:
         run: pip3 install ansible molecule[docker,lint] docker pytest-testinfra yamllint
 
       - name: Run Molecule tests.
-        run: molecule test -- --skip-tags provision_al_agent
+        run: molecule test -- --skip-tags provision_al_agent,configure_al_agent
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
