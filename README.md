@@ -1,6 +1,6 @@
 # Ansible Role: alagent
 
-[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+[![Molecule](https://github.com/deekayen/al-agents-ansible-playbooks/actions/workflows/ci.yml/badge.svg)](https://github.com/deekayen/al-agents-ansible-playbooks/actions/workflows/ci.yml) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 
 This playbook is used to install and configure the Alert Logic agent.
 
