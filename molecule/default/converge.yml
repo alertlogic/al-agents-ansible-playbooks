@@ -3,7 +3,7 @@
   hosts: all
   become: true
 
-  pre_task:
+  pre_tasks:
     - name: Install GnuPG for apt key import.
       ansible.builtin.apt:
         deb: gnupg
