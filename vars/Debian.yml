@@ -7,3 +7,5 @@ al_agent_syslog_ng_source: "{{ ( ansible_distribution_major_version >= '7' ) | t
 al_agent_base_url: 'https://scc.alertlogic.net'
 al_agent_pkg_name_prefix: 'al-agent_LATEST_'
 al_agent_pkg_url: "{{ al_agent_base_url }}/software/{{ al_agent_pkg_name_prefix }}{{al_agent_pkg_name_arch}}.{{al_agent_pkg_name_ext}}"
+al_agent_gpg_key: "{{ al_agent_base_url }}/software/al-agent-pkg-key.asc"
+al_agent_gpg_fingerprint: '9a2a3e9a817127b121b2b2fb00802f0e0186cc36'
