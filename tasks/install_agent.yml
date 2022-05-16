@@ -10,6 +10,14 @@
       until: install_result is success
       when: ansible_os_family == "Debian"
 
+    - name: Import Alert Logic Atlas GPG key.
+      ansible.builtin.rpm_key:
+        key: "{{ al_agent_gpg_key }}"
+        fingerprint: "{{ al_agent_gpg_fingerprint }}"
+        state: present
+      when:
+        - ansible_os_family == "RedHat"
+
     - name: Install Alert Logic Agent on CentOS/RHEL
       ansible.builtin.yum:
         name: "{{ al_agent_pkg_url }}"
