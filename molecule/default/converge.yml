@@ -3,5 +3,15 @@
   hosts: all
   become: true
 
+  pre_task:
+    - name: Install GnuPG for apt key import.
+      ansible.builtin.apt:
+        deb: gnupg
+      register: install_result
+      retries: 3
+      until: install_result is success
+      when: ansible_os_family == "Debian"
+
   roles:
     - role: deekayen.alagent
+
